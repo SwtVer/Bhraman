@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from vendor.models import  Vendor
 from menu.models import Category, PackageItem
 from django.db.models import Prefetch
+from django.http import HttpResponse
 
 def marketplace(request):
     vendors = Vendor.objects.filter(is_approved=True, user__is_active=True)
@@ -28,3 +29,11 @@ def vendor_detail(request, vendor_slug):
         
 
     return render(request, 'marketplace/vendor_detail.html',context)
+
+def add_to_cart(request, package_id):
+    return HttpResponse('testing')
+
+#just for check -abhishek
+
+def decrease_cart(request, package_id):
+    return HttpResponse('testing')
