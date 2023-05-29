@@ -1,12 +1,29 @@
-// maybe we skipped something  here .-video 139 -Abhishek
+let autocomplete;
 
-
-$(document).ready(function(){
-    // add to cart
-    $('.add_to_cart').on('click', function(e){
-        e.preventDefault();
-        package_id = $(this).attr('data-id');
-        alert(package_id);
+function initAutoComplete(){
+autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById('id_address'),
+    {
+        types: ['geocode', 'establishment'],
+        //default in this app is "IN" - add your country code
+        componentRestrictions: {'country': ['in','np']},
     })
-});
-//checking my bug
+// function to specify what should happen when the prediction is clicked
+autocomplete.addListener('place_changed', onPlaceChanged);
+}
+
+function onPlaceChanged (){
+    var place = autocomplete.getPlace();
+
+    // User did not select the prediction. Reset the input field or alert()
+    if (!place.geometry){
+        document.getElementById('id_address').placeholder = "Start typing...";
+    }
+    else{
+         console.log('place name=>', place.name)
+    }
+
+    //get address component and assign them in the field
+    //console.log(place);
+    var geocoder = new google.maps.Geocoder()
+    var address = document.getElementById('id_address').value 
