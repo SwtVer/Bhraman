@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render , redirect
 from vendor.models import  Vendor
 from menu.models import Category, PackageItem
 from django.db.models import Prefetch
+from django.http import HttpResponse
 from .forms import ReviewForm
 from django.contrib import messages
 from .models import ReviewRating
@@ -32,6 +33,14 @@ def vendor_detail(request, vendor_slug):
     }
 
     return render(request, 'marketplace/vendor_detail.html',context)
+
+def add_to_cart(request, package_id):
+    return HttpResponse('testing')
+
+#just for check -abhishek
+
+def decrease_cart(request, package_id):
+    return HttpResponse('testing')
 
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
